@@ -1,13 +1,39 @@
 public class Calculator {
 
-    public void someMethod(){
+    @FunctionalInterface
+    interface MathOperation {
+        int operation(int number1, int number2);
+    }
 
-        System.out.println("It works!");
+    public int operate(int a, int b, MathOperation mathOperation) {
+        return mathOperation.operation(a, b);
+    }
+
+    private void addition() {
+        MathOperation additionOp = (number1, number2) -> number1 + number2;
+        System.out.println("250 + 10 = " + operate(250, 10, additionOp));
+    }
+
+    private void subtraction() {
+        MathOperation subtractionOp = (number1, number2) -> number1 - number2;
+        System.out.println("250 - 10 = " + operate(250, 10, subtractionOp));
+    }
+
+    private void multiplication() {
+        MathOperation multiplicationOp = (number1, number2) -> number1 * number2;
+        System.out.println("250 * 10 = " + operate(250, 10, multiplicationOp));
+    }
+
+    private void division() {
+        MathOperation divisionOp = (number1, number2) -> number1 / number2;
+        System.out.println("250 / 10 = " + operate(250, 10, divisionOp));
     }
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        calculator.someMethod();
+        calculator.addition();
+        calculator.subtraction();
+        calculator.multiplication();
+        calculator.division();
     }
-
 }
